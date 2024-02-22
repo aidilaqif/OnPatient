@@ -8,6 +8,10 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String selectedFilter = 'All Patients'; // Default selected filter
+  String patientName = "Siti Kassim"; // Example patient name
+  int patientAge = 75; // Example patient age
+  int bedNumber = 123; // Example bed number
+  int wardNumber = 456; // Example ward number
 
   @override
   Widget build(BuildContext context) {
@@ -103,20 +107,33 @@ class _HomePageState extends State<HomePage> {
         return ListView.builder(
           itemCount: 10, // Replace with the actual number of patients
           itemBuilder: (context, index) {
-            return buildPatientItem();
+            return buildPatientItem(
+                patientName, patientAge, bedNumber, wardNumber);
           },
         );
       case 'Status':
-        return Text('Content for Status');
+        return ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return buildStatusItem(patientName);
+          },
+        );
+
       case 'Location':
-        return Text('Content for Location');
+        return ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return buildLocationItem(patientName, bedNumber, wardNumber);
+          },
+        );
       default:
         return Container();
     }
   }
 }
 
-Widget buildPatientItem() {
+Widget buildPatientItem(
+    String patientName, int patientAge, int bedNumber, int wardNumber) {
   return Container(
       height: 98,
       width: 236,
@@ -133,15 +150,15 @@ Widget buildPatientItem() {
         mainAxisAlignment: MainAxisAlignment.spaceEvenly,
         children: [
           Text(
-            "Siti Kassim",
+            patientName,
             style: TextStyle(
               fontFamily: 'Raleway',
-              fontWeight: FontWeight.w500,
+              fontWeight: FontWeight.bold,
               fontSize: 17,
             ),
           ),
           Text(
-            "75 Years Old",
+            patientAge.toString() + "Years Old",
             style: TextStyle(
               fontFamily: 'Raleway',
               fontSize: 12,
@@ -155,14 +172,88 @@ Widget buildPatientItem() {
               children: [
                 Image.asset("icon/bed.png"),
                 SizedBox(width: 5),
-                Text("data"),
+                Text(bedNumber.toString()),
                 SizedBox(width: 10),
                 Image.asset("icon/ward.png"),
                 SizedBox(width: 5),
-                Text("data")
+                Text(wardNumber.toString())
               ],
             ),
           ),
+        ],
+      ));
+}
+
+Widget buildStatusItem(String patientName) {
+  return Container(
+      height: 50,
+      width: 236,
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: Colors.black,
+            width: 0.5,
+          ),
+        ),
+        color: Colors.transparent,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            patientName,
+            style: TextStyle(
+                fontFamily: 'Raleway',
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Color(0XFF5D5656)),
+          ),
+          Icon(
+            Icons.wheelchair_pickup,
+            color: Colors.green,
+          ),
+        ],
+      ));
+}
+
+Widget buildLocationItem(String patientName, int wardNumber, int bedNumber) {
+  return Container(
+      height: 50,
+      width: 236,
+      margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
+      decoration: BoxDecoration(
+        border: Border(
+          top: BorderSide(
+            color: Colors.black,
+            width: 0.5,
+          ),
+        ),
+        color: Colors.transparent,
+      ),
+      child: Row(
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            patientName,
+            style: TextStyle(
+                fontFamily: 'Raleway',
+                fontSize: 20,
+                fontWeight: FontWeight.bold,
+                color: Color(0XFF5D5656)),
+          ),
+          Text(
+            "Ward Number:" +
+                wardNumber.toString() +
+                "," +
+                "Bed Number:" +
+                bedNumber.toString(),
+            style: TextStyle(
+                fontFamily: 'Raleway',
+                fontSize: 12,
+                fontWeight: FontWeight.w500,
+                color: Color(0XFF5D5656)),
+          )
         ],
       ));
 }
