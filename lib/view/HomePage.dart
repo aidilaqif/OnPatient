@@ -8,6 +8,7 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
+
   Filter selectedFilter = Filter.AllPatients;
   final patientName = "Siti Kassim";
   final patientAge = 75;
