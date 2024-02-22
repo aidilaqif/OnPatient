@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:onpatience/view/HomePage.dart';
+import 'package:onpatience/page/HomePage.dart';
 
 void main() {
   runApp(const MyApp());
