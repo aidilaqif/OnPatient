@@ -8,7 +8,7 @@ class HomePage extends StatefulWidget {
 
 class _HomePageState extends State<HomePage> {
   String selectedFilter = 'All Patients'; // Default selected filter
-  String patientName = "Siti Kassim"; // Example patient name
+  String patientName = "Siti Kassam"; // Example patient name
   int patientAge = 75; // Example patient age
   int bedNumber = 123; // Example bed number
   int wardNumber = 456; // Example ward number
