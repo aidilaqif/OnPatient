@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "94808323220",
+    "project_id": "onpatient-104e4",
+    "storage_bucket": "onpatient-104e4.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:94808323220:android:f1a683d7d4ee41fd917081",
+        "android_client_info": {
+          "package_name": "com.example.onpatience"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCv22PC-HnFFE0z0UDhvtoIX5SvV03iZvo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
