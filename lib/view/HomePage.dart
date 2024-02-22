@@ -130,6 +130,39 @@ Widget buildPatientItem() {
         color: Color(0xFFC7E9F4),
       ),
       child: Column(
-        children: [Text("Siti Kassim"), Text("75 Years Old")],
+        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
+        children: [
+          Text(
+            "Siti Kassim",
+            style: TextStyle(
+              fontFamily: 'Raleway',
+              fontWeight: FontWeight.w500,
+              fontSize: 17,
+            ),
+          ),
+          Text(
+            "75 Years Old",
+            style: TextStyle(
+              fontFamily: 'Raleway',
+              fontSize: 12,
+              color: Color(0xFF0A8ED9),
+            ),
+          ),
+          SizedBox(
+            height: 20,
+            child: Row(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Image.asset("icon/bed.png"),
+                SizedBox(width: 5),
+                Text("data"),
+                SizedBox(width: 10),
+                Image.asset("icon/ward.png"),
+                SizedBox(width: 5),
+                Text("data")
+              ],
+            ),
+          ),
+        ],
       ));
 }
