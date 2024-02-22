@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:stroke_text/stroke_text.dart';
+
+enum Filter { AllPatients, Status, Location }
 
 class HomePage extends StatefulWidget {
   @override
@@ -7,11 +8,11 @@ class HomePage extends StatefulWidget {
 }
 
 class _HomePageState extends State<HomePage> {
-  String selectedFilter = 'All Patients'; // Default selected filter
-  String patientName = "Siti Kassim"; // Example patient name
-  int patientAge = 75; // Example patient age
-  int bedNumber = 123; // Example bed number
-  int wardNumber = 456; // Example ward number
+  Filter selectedFilter = Filter.AllPatients;
+  final patientName = "Siti Kassim";
+  final patientAge = 75;
+  final bedNumber = 123;
+  final wardNumber = 456;
 
   @override
   Widget build(BuildContext context) {
@@ -27,15 +28,13 @@ class _HomePageState extends State<HomePage> {
                 height: 42,
                 width: 42,
               ),
-              StrokeText(
-                text: "OnPatient",
-                textStyle: TextStyle(
+              Text(
+                "OnPatient",
+                style: TextStyle(
                   fontFamily: 'Sansita One',
                   fontSize: 26,
                   color: Color(0xFF91E2DB),
                 ),
-                strokeColor: Color(0xFF475C5B),
-                strokeWidth: 3,
               ),
               Image.asset(
                 'icon/noti_icon.png',
@@ -57,9 +56,9 @@ class _HomePageState extends State<HomePage> {
             child: Row(
               mainAxisAlignment: MainAxisAlignment.spaceBetween,
               children: [
-                buildFilterItem('All Patients'),
-                buildFilterItem('Status'),
-                buildFilterItem('Location'),
+                buildFilterItem(Filter.AllPatients),
+                buildFilterItem(Filter.Status),
+                buildFilterItem(Filter.Location),
               ],
             ),
           ),
@@ -73,7 +72,7 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget buildFilterItem(String filter) {
+  Widget buildFilterItem(Filter filter) {
     return GestureDetector(
       onTap: () {
         setState(() {
@@ -89,7 +88,7 @@ class _HomePageState extends State<HomePage> {
         padding: EdgeInsets.symmetric(vertical: 16, horizontal: 20),
         child: Center(
           child: Text(
-            filter,
+            filter.toString().split('.').last,
             style: TextStyle(
               color:
                   selectedFilter == filter ? Colors.white : Color(0XFF858585),
@@ -101,40 +100,36 @@ class _HomePageState extends State<HomePage> {
     );
   }
 
-  Widget getContentForFilter(String filter) {
+  Widget getContentForFilter(Filter filter) {
     switch (filter) {
-      case 'All Patients':
-        return ListView.builder(
-          itemCount: 10, // Replace with the actual number of patients
-          itemBuilder: (context, index) {
-            return buildPatientItem(
-                patientName, patientAge, bedNumber, wardNumber);
-          },
-        );
-      case 'Status':
+      case Filter.AllPatients:
         return ListView.builder(
           itemCount: 10,
           itemBuilder: (context, index) {
-            return buildStatusItem(patientName);
+            return buildPatientItem();
           },
         );
-
-      case 'Location':
+      case Filter.Status:
         return ListView.builder(
           itemCount: 10,
           itemBuilder: (context, index) {
-            return buildLocationItem(patientName, bedNumber, wardNumber);
+            return buildStatusItem();
+          },
+        );
+      case Filter.Location:
+        return ListView.builder(
+          itemCount: 10,
+          itemBuilder: (context, index) {
+            return buildLocationItem();
           },
         );
       default:
         return Container();
     }
   }
-}
 
-Widget buildPatientItem(
-    String patientName, int patientAge, int bedNumber, int wardNumber) {
-  return Container(
+  Widget buildPatientItem() {
+    return Container(
       height: 98,
       width: 236,
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -158,7 +153,7 @@ Widget buildPatientItem(
             ),
           ),
           Text(
-            patientAge.toString() + "Years Old",
+            '$patientAge Years Old',
             style: TextStyle(
               fontFamily: 'Raleway',
               fontSize: 12,
@@ -181,11 +176,12 @@ Widget buildPatientItem(
             ),
           ),
         ],
-      ));
-}
+      ),
+    );
+  }
 
-Widget buildStatusItem(String patientName) {
-  return Container(
+  Widget buildStatusItem() {
+    return Container(
       height: 50,
       width: 236,
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -214,11 +210,12 @@ Widget buildStatusItem(String patientName) {
             color: Colors.green,
           ),
         ],
-      ));
-}
+      ),
+    );
+  }
 
-Widget buildLocationItem(String patientName, int wardNumber, int bedNumber) {
-  return Container(
+  Widget buildLocationItem() {
+    return Container(
       height: 50,
       width: 236,
       margin: EdgeInsets.symmetric(vertical: 8, horizontal: 16),
@@ -243,11 +240,7 @@ Widget buildLocationItem(String patientName, int wardNumber, int bedNumber) {
                 color: Color(0XFF5D5656)),
           ),
           Text(
-            "Ward Number:" +
-                wardNumber.toString() +
-                "," +
-                "Bed Number:" +
-                bedNumber.toString(),
+            "Ward Number: $wardNumber, Bed Number: $bedNumber",
             style: TextStyle(
                 fontFamily: 'Raleway',
                 fontSize: 12,
@@ -255,5 +248,7 @@ Widget buildLocationItem(String patientName, int wardNumber, int bedNumber) {
                 color: Color(0XFF5D5656)),
           )
         ],
-      ));
+      ),
+    );
+  }
 }
